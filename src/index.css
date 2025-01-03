@@ -22,6 +22,7 @@ header > p {
   background-color: #10a95b;
   display: flex;
   padding: 10px 50px;
+  width: 350px;
   align-items: center;
   flex-direction: column;
   justify-content: center;
@@ -50,4 +51,33 @@ header > p {
   background-color: rgba(255, 255, 255, 0.1);
   padding: 10px 15px;
   border-bottom: 2px solid whitesmoke;
+}
+
+.keyboard {
+  display: flex;
+  margin-top: 40px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 450px;
+  gap: 5px;
+}
+.keyboard > button {
+  border: none;
+  border-radius: 5px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  background-color: yellow;
+}
+.newgame {
+  width: 200px;
+  height: 40px;
+  font-size: 1.1rem;
+  margin-top: 30px;
+  background-color: lightseagreen;
+  border: none;
+  border: 1px solid white;
+  border-radius: 5px;
+  cursor: pointer;
 }

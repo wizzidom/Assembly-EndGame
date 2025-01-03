@@ -1,8 +1,10 @@
 import React from "react";
 import { languages } from "./languages";
+
 export default function App() {
   const [currentWord, setCurrentWord] = React.useState("react");
   let lettersArray = Array.from(currentWord);
+  const alphabets = "abcdefghijklmnopqrstuvwxyz";
 
   return (
     <main>
@@ -34,10 +36,18 @@ export default function App() {
       </section>
 
       <section className="letters">
-        {lettersArray.map((letter) => (
-          <span>{letter.toUpperCase()}</span>
+        {lettersArray.map((letter, index) => (
+          <span key={index}>{letter.toUpperCase()}</span>
         ))}
       </section>
+
+      <section className="keyboard">
+        {alphabets.split("").map((alphabet) => (
+          <button key={alphabet}>{alphabet.toUpperCase()}</button>
+        ))}
+      </section>
+
+      <button className="newgame">New Game</button>
     </main>
   );
 }
