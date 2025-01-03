@@ -6,6 +6,11 @@ export default function App() {
   let lettersArray = Array.from(currentWord);
   const alphabets = "abcdefghijklmnopqrstuvwxyz";
 
+  const [guessedLetters, setGuessedLetters] = React.useState([]);
+  function choose(id) {
+    setGuessedLetters((prevGuessedLetters) => [...prevGuessedLetters, id]);
+  }
+  console.log(guessedLetters);
   return (
     <main>
       <header>
@@ -43,7 +48,9 @@ export default function App() {
 
       <section className="keyboard">
         {alphabets.split("").map((alphabet) => (
-          <button key={alphabet}>{alphabet.toUpperCase()}</button>
+          <button key={alphabet} onClick={() => choose(alphabet.toUpperCase())}>
+            {alphabet.toUpperCase()}
+          </button>
         ))}
       </section>
 
