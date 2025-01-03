@@ -1,5 +1,9 @@
+import React from "react";
 import { languages } from "./languages";
 export default function App() {
+  const [currentWord, setCurrentWord] = React.useState("react");
+  let lettersArray = Array.from(currentWord);
+
   return (
     <main>
       <header>
@@ -18,6 +22,7 @@ export default function App() {
       <section className="languages">
         {languages.map((language) => (
           <p
+            key={language.name}
             style={{
               color: language.color,
               background: language.backgroundColor,
@@ -25,6 +30,12 @@ export default function App() {
           >
             {language.name}
           </p>
+        ))}
+      </section>
+
+      <section className="letters">
+        {lettersArray.map((letter) => (
+          <span>{letter.toUpperCase()}</span>
         ))}
       </section>
     </main>

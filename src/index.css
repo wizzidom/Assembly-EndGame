@@ -40,3 +40,14 @@ header > p {
   padding: 10px;
   align-items: center;
 }
+.letters {
+  margin-top: 30px;
+  display: flex;
+  gap: 3px;
+}
+
+.letters > span {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 10px 15px;
+  border-bottom: 2px solid whitesmoke;
+}
