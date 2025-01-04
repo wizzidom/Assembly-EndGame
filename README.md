@@ -1,8 +1,11 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+You are fighing the forces of evil to try and save the worlds programming languages, leaving only assembly. Its pretty much a rebranded hangman game with a twist for developers
 
-Currently, two official plugins are available:
+To run this web app on your local machine you can download on git clone the repository and then run the following command on your terminal. You should be in the directory of the app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+        npm install
+
+To run the app run this command
+
+        npm run dev
