@@ -81,3 +81,9 @@ header > p {
   border-radius: 5px;
   cursor: pointer;
 }
+#chosen {
+  background: lime;
+}
+#wrong {
+  background-color: red;
+}

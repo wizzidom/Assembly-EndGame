@@ -1,14 +1,16 @@
 import React from "react";
 import { languages } from "./languages";
-
+//13: 45
 export default function App() {
-  const [currentWord, setCurrentWord] = React.useState("react");
+  const [currentWord, setCurrentWord] = React.useState("REACT");
   let lettersArray = Array.from(currentWord);
   const alphabets = "abcdefghijklmnopqrstuvwxyz";
 
   const [guessedLetters, setGuessedLetters] = React.useState([]);
   function choose(id) {
-    setGuessedLetters((prevGuessedLetters) => [...prevGuessedLetters, id]);
+    setGuessedLetters((prevLetters) =>
+      prevLetters.includes(id) ? prevLetters : [...prevLetters, id]
+    );
   }
   console.log(guessedLetters);
   return (
