@@ -8,15 +8,22 @@ export default function App() {
   const [guessedLetters, setGuessedLetters] = React.useState([]);
 
   //Derived values
-  let wrongGuessCount = 0;
-  let wrongGuessArray = guessedLetters.map((letter) => {
+  let wrongGuessCount = [];
+  let count = -1;
+  let wrongGuessArray = guessedLetters.map((letter, index) => {
     if (!currentWord.includes(letter.toUpperCase())) {
-      wrongGuessCount += 1;
+      count += 1;
+      wrongGuessCount.push(count);
     }
   });
   console.log(wrongGuessCount);
 
   //Static values
+  let isGameLost = wrongGuessCount.length >= languages.length - 1;
+  let isGameWon = currentWord
+    .split("")
+    .every((letter) => guessedLetters.includes(letter));
+  let isGameOver = isGameLost || isGameWon;
   let lettersArray = Array.from(currentWord);
   const alphabets = "abcdefghijklmnopqrstuvwxyz";
   let red;
@@ -36,16 +43,27 @@ export default function App() {
         </p>
       </header>
       <section className="game-status">
-        <h2>You Win</h2>
-        <p>Well done</p>
+        {isGameWon && (
+          <div id="win">
+            <h2>You Win</h2>
+            <p>Well done, you are safe from assembly</p>
+          </div>
+        )}
+        {isGameLost && (
+          <div id="lose">
+            <h2>You Lose</h2>
+            <p>Good luck trying to learn assembly</p>
+          </div>
+        )}
       </section>
       <section className="languages">
-        {languages.map((language) => (
+        {languages.map((language, index) => (
           <p
-            key={language.name}
+            key={index}
             style={{
               color: language.color,
               background: language.backgroundColor,
+              opacity: wrongGuessCount.includes(index) ? "0.2" : "1",
             }}
           >
             {language.name}
@@ -62,28 +80,36 @@ export default function App() {
           </span>
         ))}
       </section>
-      <section className="keyboard">
-        {alphabets.split("").map((alphabet) => {
-          const isGuessed = guessedLetters.includes(alphabet.toUpperCase());
-          const isCorrect =
-            isGuessed && lettersArray.includes(alphabet.toUpperCase());
-          const iswrong =
-            isGuessed && !lettersArray.includes(alphabet.toUpperCase());
-          const className = clsx({ chosen: isCorrect, wrong: iswrong });
+      {isGameOver ? (
+        ""
+      ) : (
+        <section className="keyboard">
+          {alphabets.split("").map((alphabet) => {
+            const isGuessed = guessedLetters.includes(alphabet.toUpperCase());
+            const isCorrect =
+              isGuessed && lettersArray.includes(alphabet.toUpperCase());
+            const iswrong =
+              isGuessed && !lettersArray.includes(alphabet.toUpperCase());
+            const className = clsx({ chosen: isCorrect, wrong: iswrong });
 
-          return (
-            <button
-              className={className}
-              key={alphabet}
-              onClick={() => choose(alphabet.toUpperCase())}
-            >
-              {alphabet.toUpperCase()}
-            </button>
-          );
-        })}
-      </section>
+            return (
+              <button
+                className={className}
+                key={alphabet}
+                onClick={() => choose(alphabet.toUpperCase())}
+              >
+                {alphabet.toUpperCase()}
+              </button>
+            );
+          })}
+        </section>
+      )}
 
-      <button className="newgame">New Game</button>
+      {isGameOver && (
+        <button className="newgame" onClick={() => window.location.reload()}>
+          New Game
+        </button>
+      )}
     </main>
   );
 }

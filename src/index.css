@@ -19,10 +19,11 @@ header > p {
 }
 .game-status {
   margin: 20px;
-  background-color: #10a95b;
+
   display: flex;
   padding: 10px 50px;
   width: 350px;
+  min-height: 100px;
   align-items: center;
   flex-direction: column;
   justify-content: center;
@@ -95,4 +96,21 @@ header > p {
 }
 .letters > span {
   opacity: 0.8;
+}
+.out {
+  background-color: black;
+  border: 5px solid red;
+}
+
+#win {
+  background-color: green;
+  width: 200px;
+  text-align: center;
+  padding: 10px;
+}
+#lose {
+  background-color: red;
+  width: 200px;
+  text-align: center;
+  padding: 10px;
 }
