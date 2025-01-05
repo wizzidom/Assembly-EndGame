@@ -81,9 +81,9 @@ header > p {
   border-radius: 5px;
   cursor: pointer;
 }
-#chosen {
-  background: lime;
+.keyboard > button.chosen {
+  background-color: lime;
 }
-#wrong {
+.keyboard > button.wrong {
   background-color: red;
 }

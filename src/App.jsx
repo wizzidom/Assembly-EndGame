@@ -1,18 +1,21 @@
 import React from "react";
 import { languages } from "./languages";
+import { clsx } from "clsx";
 //13: 45
 export default function App() {
   const [currentWord, setCurrentWord] = React.useState("REACT");
+  const [guessedLetters, setGuessedLetters] = React.useState([]);
+
   let lettersArray = Array.from(currentWord);
   const alphabets = "abcdefghijklmnopqrstuvwxyz";
-
-  const [guessedLetters, setGuessedLetters] = React.useState([]);
+  let red;
   function choose(id) {
     setGuessedLetters((prevLetters) =>
       prevLetters.includes(id) ? prevLetters : [...prevLetters, id]
     );
   }
   console.log(guessedLetters);
+
   return (
     <main>
       <header>
@@ -22,12 +25,10 @@ export default function App() {
           safe from Assembly!
         </p>
       </header>
-
       <section className="game-status">
         <h2>You Win</h2>
         <p>Well done</p>
       </section>
-
       <section className="languages">
         {languages.map((language) => (
           <p
@@ -41,19 +42,30 @@ export default function App() {
           </p>
         ))}
       </section>
-
       <section className="letters">
         {lettersArray.map((letter, index) => (
           <span key={index}>{letter.toUpperCase()}</span>
         ))}
       </section>
-
       <section className="keyboard">
-        {alphabets.split("").map((alphabet) => (
-          <button key={alphabet} onClick={() => choose(alphabet.toUpperCase())}>
-            {alphabet.toUpperCase()}
-          </button>
-        ))}
+        {alphabets.split("").map((alphabet) => {
+          const isGuessed = guessedLetters.includes(alphabet.toUpperCase());
+          const isCorrect =
+            isGuessed && lettersArray.includes(alphabet.toUpperCase());
+          const iswrong =
+            isGuessed && !lettersArray.includes(alphabet.toUpperCase());
+          const className = clsx({ chosen: isCorrect, wrong: iswrong });
+          console.log(className);
+          return (
+            <button
+              className={className}
+              key={alphabet}
+              onClick={() => choose(alphabet.toUpperCase())}
+            >
+              {alphabet.toUpperCase()}
+            </button>
+          );
+        })}
       </section>
 
       <button className="newgame">New Game</button>
