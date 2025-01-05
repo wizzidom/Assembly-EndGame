@@ -3,9 +3,20 @@ import { languages } from "./languages";
 import { clsx } from "clsx";
 //13: 45
 export default function App() {
+  //State Values
   const [currentWord, setCurrentWord] = React.useState("REACT");
   const [guessedLetters, setGuessedLetters] = React.useState([]);
 
+  //Derived values
+  let wrongGuessCount = 0;
+  let wrongGuessArray = guessedLetters.map((letter) => {
+    if (!currentWord.includes(letter.toUpperCase())) {
+      wrongGuessCount += 1;
+    }
+  });
+  console.log(wrongGuessCount);
+
+  //Static values
   let lettersArray = Array.from(currentWord);
   const alphabets = "abcdefghijklmnopqrstuvwxyz";
   let red;
@@ -14,7 +25,6 @@ export default function App() {
       prevLetters.includes(id) ? prevLetters : [...prevLetters, id]
     );
   }
-  console.log(guessedLetters);
 
   return (
     <main>
@@ -44,7 +54,12 @@ export default function App() {
       </section>
       <section className="letters">
         {lettersArray.map((letter, index) => (
-          <span key={index}>{letter.toUpperCase()}</span>
+          <span key={index}>
+            {guessedLetters.includes(letter.toUpperCase()) &&
+            lettersArray.includes(letter.toUpperCase())
+              ? letter
+              : ""}
+          </span>
         ))}
       </section>
       <section className="keyboard">
@@ -55,7 +70,7 @@ export default function App() {
           const iswrong =
             isGuessed && !lettersArray.includes(alphabet.toUpperCase());
           const className = clsx({ chosen: isCorrect, wrong: iswrong });
-          console.log(className);
+
           return (
             <button
               className={className}
